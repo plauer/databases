@@ -3,7 +3,7 @@ $(function() {
 })
 
 var app = {
-  server : "https://api.parse.com/1/classes/chatterbox",
+  server : "http://localhost:3000/classes/messages",
 
   init : function() {
     app.username = window.location.search.substr(10);
@@ -48,7 +48,7 @@ var app = {
     if ( $('#chats').find('.chat[data-id=' + message.objectId+ ']').length === 0 ) {
       var $html = app.renderMessage(message);
       console.log("Never been here before")
-      $('#chats').prepend($html); 
+      $('#chats').prepend($html);
     } else {
       console.log("This item is on the page")
     }
@@ -131,7 +131,7 @@ var app = {
 
 // var getMessages = function() {
 //   $.ajax({
-//     url: 'https://api.parse.com/1/classes/chatterbox', 
+//     url: 'https://api.parse.com/1/classes/chatterbox',
 //     type: 'GET',
 //     data: JSON.stringify(message),
 //     contentType : 'application/json',
