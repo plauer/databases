@@ -25,8 +25,8 @@ var app = {
     var $form = e.target;
     var message = {
       'username': app.username,
-      'text': app.$text.val()
-      // 'roomname': '4chan'
+      'text': app.$text.val(),
+      'roomname': '4chan'
     };
     app.sendMessage(message);
   },
