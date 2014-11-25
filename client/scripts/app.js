@@ -56,11 +56,13 @@ var app = {
 
   processMessages : function(messages) {
     // $('#chats').empty();
-
-    for (var i = messages.length; i > 0; i--) {
-      //create html nodes
-      app.addToDom(messages[i -1]);
+    if  (messages) {
+      for (var i = messages.length; i > 0; i--) {
+        //create html nodes
+        app.addToDom(messages[i -1]);
+      }
     }
+
   },
 
   loadMessages : function() {

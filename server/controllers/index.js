@@ -7,12 +7,14 @@ module.exports = {
   messages: {
     get: function (req, res) {
       console.log("About to respond to Get");
-      this.model.get(function(results) {
-        res.json({'cat':'meow'});
-      })
+      // this.model.get(function(results) {
+      //   res.json({'cat':'meow'});
+      // })
+      res.json({'cat':'meow'});
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
+      console.log(req.body);
       console.log("About to respond to post");
       res.json({'cat':'meow'});
     } // a function which handles posting a message to the database
