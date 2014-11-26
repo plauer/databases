@@ -17,7 +17,7 @@ module.exports = {
     }, // a function which produces all the messages
     post: function (params, callback) {
       var queryString = "insert into messages (text, userid, roomname) \
-                         values (?, 1, ?);";
+                         values (?, (select id from users where username = ? limit 1), ?);";
       db.query(queryString, params, function(err, rows) {
         callback(rows);
       });
@@ -26,13 +26,17 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {
-
+    get: function (params, callback) {
+      var userQuery = "select id from users where username = ?;";
+      db.query(userQuery, params, function(err, rows) {
+        if (err) console.log(err);
+        callback(rows);
+      });
     },
-    post: function (params, callback) {
+    post: function (params) {
       var queryString = "insert into users (username) values (?);";
       db.query(queryString, params, function(err, results) {
-        callback(results)
+        if (err) console.log(err);
       });
     }
   }

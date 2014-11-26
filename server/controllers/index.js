@@ -19,6 +19,14 @@ module.exports = {
       var username = req.body.username;
       var text = req.body.text;
       var roomname = req.body.roomname;
+      //check if user exists
+      models.users.get([req.body.username], function(results) {
+        if (!results.length) {
+          console.log("new user created");
+          models.users.post([req.body.username]);
+        }
+      });
+
       var params = [text, username, roomname];
       models.messages.post(params, function(results) {
         console.log(results)

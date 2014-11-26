@@ -34,10 +34,12 @@ var app = {
   loadAllMessages : function() {
     console.log("Refreshing DOM...")
     app.loadMessages();
-    setTimeout(app.loadAllMessages, 2000)
+    setTimeout(app.loadAllMessages, 6000)
   },
 
   renderMessage : function(message) {
+    console.log("this is the message id")
+    console.log(message.id)
     var $user = $('<div>', {class : 'user'}).text(message.username);
     var $text = $('<div>', {class : 'text'}).text(message.text);
     var $message = $('<div>', {class : 'chat', 'data-id': message.id }).append($user, $text);
@@ -97,7 +99,7 @@ var app = {
       contentType : 'application/json',
       success: function (json) {
         console.log(json);
-        message.objectId = json.objectId;
+        message.id = json.insertId;
         app.addToDom(message);
       },
       error: function(data) {
