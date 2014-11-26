@@ -8,7 +8,8 @@ module.exports = {
     get: function (req, res) {
       console.log("About to respond to Get");
       models.messages.get(function(results) {
-        res.json(results);
+
+        res.json({results: results});
       });
       // res.json({'cat':'meow'});
 

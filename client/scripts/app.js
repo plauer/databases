@@ -40,12 +40,12 @@ var app = {
   renderMessage : function(message) {
     var $user = $('<div>', {class : 'user'}).text(message.username);
     var $text = $('<div>', {class : 'text'}).text(message.text);
-    var $message = $('<div>', {class : 'chat', 'data-id': message.objectId }).append($user, $text);
+    var $message = $('<div>', {class : 'chat', 'data-id': message.id }).append($user, $text);
     return $message;
   },
 
   addToDom : function(message) {
-    if ( $('#chats').find('.chat[data-id=' + message.objectId+ ']').length === 0 ) {
+    if ( $('#chats').find('.chat[data-id=' + message.id+ ']').length === 0 ) {
       var $html = app.renderMessage(message);
       console.log("Never been here before")
       $('#chats').prepend($html);
@@ -73,18 +73,19 @@ var app = {
       data: {order: '-createdAt'},
       contentType : 'application/json',
       success: function (json) {
-        // console.log(json.results);
+        console.log("Get Response ...")
+        console.log(json.results);
         app.processMessages(json.results)
         // var messages = parseJSON(data);
         // drawMessages(messages);
         // drawRefreshButton();
       },
-      // error: function(data) {
-      //   console.log("Error")
-      // }
-      complete: function() {
-        // app.stopSpinner();
+      error: function(data) {
+        console.log("Error")
       }
+      // complete: function() {
+      //   console.log("no success")
+      // }
     })
   },
 
@@ -99,15 +100,15 @@ var app = {
         message.objectId = json.objectId;
         app.addToDom(message);
       },
-      // error: function(data) {
-      //   console.log("Error")
-      // }
+      error: function(data) {
+        console.log("Error")
+      },
       complete: function() {
         // app.stopSpinner();
       }
-    })
+    });
   }
-}
+};
 
 
 
