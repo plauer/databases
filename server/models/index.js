@@ -6,20 +6,34 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (callback) {
-      // var queryString = "select "
-      // db.query(queryString, function(err, rows) {
+      var queryString = "select users.username, messages.id, messages.text, messages.roomname from messages \
+                         join users on messages.user_id = user.id \
+                         order by messages.id desc;";
 
-      // })
+      db.query(queryString, function(err, rows) {
+        callback(rows);
+      })
     }, // a function which produces all the messages
     post: function (params, callback) {
-      var queryString = ""
+      var queryString = "insert into messages (text, userid, roomname) \
+                         values (?, 1, ?);";
+      db.query(queryString, params, function(err, rows) {
+        callback(rows);
+      });
     } // a function which can be used to insert a message into the database
   },
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
+    get: function () {
+
+    },
+    post: function (params, callback) {
+      var queryString = "insert into users (username) values (?);";
+      db.query(queryString, params, function(err, results) {
+        callback(results)
+      });
+    }
   }
 };
 
