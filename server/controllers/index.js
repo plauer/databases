@@ -11,7 +11,6 @@ module.exports = {
 
         res.json({results: results});
       });
-      // res.json({'cat':'meow'});
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
@@ -39,10 +38,6 @@ module.exports = {
     // Ditto as above
     get: function (req, res) {},
     post: function (req, res) {
-      models.users.post(req.body.username, function(results) {
-        console.log("User successfully created");
-        res.json(results);
-      });
     }
   }
 };
